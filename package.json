@@ -1,0 +1,13 @@
+{
+  "name": "dsa-ts",
+  "version": "1.0.0",
+  "description": "This repository is for practicing data structures and algorithms with typescript",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tsx": "^4.19.2"
+  }
+}
