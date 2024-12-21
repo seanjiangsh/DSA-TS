@@ -5,7 +5,7 @@ function funChallenge(input) {
 
   // O(n)
   for (let i = 0; i < input.length; i++) {
-    anotherFunction(); // O(n)
+    // anotherFunction(); // O(n)
     let stranger = true; // O(n)
     a++; // O(n)
   }

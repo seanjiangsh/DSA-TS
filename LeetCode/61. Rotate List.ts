@@ -64,4 +64,4 @@ const k = 2;
 // Input: head = [0,1,2], k = 4
 // Output: [2,0,1]
 
-console.log(rotateRight(head, k));
+// console.log(rotateRight(head, k));

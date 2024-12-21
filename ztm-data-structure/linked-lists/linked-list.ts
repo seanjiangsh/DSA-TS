@@ -11,8 +11,8 @@ class LinkListNode<T> {
 }
 
 class LinkedList<T> {
-  head: LinkListNode<T> | null;
-  tail: LinkListNode<T> | null;
+  head: LinkListNode<T> | null = null;
+  tail: LinkListNode<T> | null = null;
   length: number = 0;
 
   constructor(value?: T) {
