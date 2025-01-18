@@ -1,5 +1,6 @@
 const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
+// O(n^2)
 function bubbleSort(array: Array<number>) {
   for (let i = 0; i < array.length; i++) {
     // Note the largest number will be the end of each round of j
