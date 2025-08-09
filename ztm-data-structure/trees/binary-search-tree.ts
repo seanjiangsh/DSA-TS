@@ -1,4 +1,4 @@
-class BinarySearchTreeNode<T> {
+export class BinarySearchTreeNode<T> {
   left: BinarySearchTreeNode<T> | null;
   right: BinarySearchTreeNode<T> | null;
   value: T;
@@ -10,8 +10,8 @@ class BinarySearchTreeNode<T> {
   }
 }
 
-class BinarySearchTree<T> {
-  private root: BinarySearchTreeNode<T> | null = null;
+export default class BinarySearchTree<T> {
+  public root: BinarySearchTreeNode<T> | null = null;
 
   constructor() {
     // Do nothing
@@ -199,6 +199,30 @@ class BinarySearchTree<T> {
       this.graph(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
   }
+
+  breadthFirstSearch(): Array<T> {
+    const queue: Array<BinarySearchTreeNode<T>> = [];
+    const result: Array<T> = [];
+
+    if (this.root) {
+      queue.push(this.root);
+    }
+
+    while (queue.length > 0) {
+      const currentNode = queue.shift();
+      if (currentNode) {
+        result.push(currentNode.value);
+        if (currentNode.left) {
+          queue.push(currentNode.left);
+        }
+        if (currentNode.right) {
+          queue.push(currentNode.right);
+        }
+      }
+    }
+
+    return result;
+  }
 }
 
 const binarySearchTree = new BinarySearchTree();
@@ -230,5 +254,8 @@ binarySearchTree.graph();
 // console.log(binarySearchTree.lookup(5));
 //     9
 //  4     20
-//1  6  15  170
+// 1  6  15  170
 //            180
+
+console.log(binarySearchTree.breadthFirstSearch());
+// [15, 4, 20, 1, 6, 170, 180]
