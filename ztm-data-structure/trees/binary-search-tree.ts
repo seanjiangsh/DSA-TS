@@ -223,6 +223,22 @@ export default class BinarySearchTree<T> {
 
     return result;
   }
+
+  breadthFirstSearchRecursive(
+    queue: Array<BinarySearchTreeNode<T>>,
+    result: Array<T>
+  ): Array<T> {
+    const node = queue.shift();
+    if (!node) return result;
+
+    const { value, left, right } = node;
+    result.push(value);
+
+    if (left) queue.push(left);
+    if (right) queue.push(right);
+
+    return this.breadthFirstSearchRecursive(queue, result);
+  }
 }
 
 const binarySearchTree = new BinarySearchTree();
@@ -259,3 +275,8 @@ binarySearchTree.graph();
 
 console.log(binarySearchTree.breadthFirstSearch());
 // [15, 4, 20, 1, 6, 170, 180]
+
+// const BFSRecursiveResult: Array<number> = [];
+const root = binarySearchTree.root!;
+const BFSRResult = binarySearchTree.breadthFirstSearchRecursive([root], []);
+console.log(BFSRResult);
