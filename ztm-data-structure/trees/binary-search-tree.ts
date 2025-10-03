@@ -200,7 +200,7 @@ export default class BinarySearchTree<T> {
     }
   }
 
-  breadthFirstSearch(): Array<T> {
+  BFS(): Array<T> {
     const queue: Array<BinarySearchTreeNode<T>> = [];
     const result: Array<T> = [];
 
@@ -224,20 +224,51 @@ export default class BinarySearchTree<T> {
     return result;
   }
 
-  breadthFirstSearchRecursive(
-    queue: Array<BinarySearchTreeNode<T>>,
-    result: Array<T>
-  ): Array<T> {
-    const node = queue.shift();
+  BFSRecursive(node: BinarySearchTreeNode<T>, result: Array<T>): Array<T> {
     if (!node) return result;
 
     const { value, left, right } = node;
     result.push(value);
 
-    if (left) queue.push(left);
-    if (right) queue.push(right);
+    if (left) {
+      // result.push(left.value);
+      this.BFSRecursive(left, result);
+    }
+    if (right) {
+      // result.push(right.value);
+      this.BFSRecursive(right, result);
+    }
 
-    return this.breadthFirstSearchRecursive(queue, result);
+    return result;
+  }
+
+  private traverseDFS(
+    node: BinarySearchTreeNode<T>,
+    result: Array<T>,
+    type: "inOrder" | "preOrder" | "postOrder"
+  ) {
+    const { value, left, right } = node;
+    if (type === "preOrder") result.push(value);
+    if (left) this.traverseDFS(left, result, type);
+    if (type === "inOrder") result.push(value);
+    if (right) this.traverseDFS(right, result, type);
+    if (type === "postOrder") result.push(value);
+    return result;
+  }
+
+  DFSInOrder() {
+    if (!this.root) return [];
+    return this.traverseDFS(this.root, [], "inOrder");
+  }
+
+  DFSPreOrder() {
+    if (!this.root) return [];
+    return this.traverseDFS(this.root, [], "preOrder");
+  }
+
+  DFSPostOrder() {
+    if (!this.root) return [];
+    return this.traverseDFS(this.root, [], "postOrder");
   }
 }
 
@@ -273,10 +304,19 @@ binarySearchTree.graph();
 // 1  6  15  170
 //            180
 
-console.log(binarySearchTree.breadthFirstSearch());
-// [15, 4, 20, 1, 6, 170, 180]
+console.log(binarySearchTree.BFS());
+// [15, 4, 20, 1, 6, 170, 180];
 
 // const BFSRecursiveResult: Array<number> = [];
-const root = binarySearchTree.root!;
-const BFSRResult = binarySearchTree.breadthFirstSearchRecursive([root], []);
-console.log(BFSRResult);
+// const root = binarySearchTree.root!;
+// binarySearchTree.BFSRecursive(root, BFSRecursiveResult);
+// console.log(BFSRecursiveResult);
+
+console.log(binarySearchTree.DFSInOrder());
+// [1, 4, 6, 15, 20, 170, 180];
+
+console.log(binarySearchTree.DFSPreOrder());
+// [15, 4, 1, 6, 20, 170, 180];
+
+console.log(binarySearchTree.DFSPostOrder());
+// [1, 6, 4, 180, 170, 20, 15];
